@@ -1,0 +1,16 @@
+import java.util.*;
+
+public class Recurcive {
+    public static void main (String[] args) {
+      display("Ajit",0);
+    }
+    
+    public static void display(String Name,int a) {
+      
+      
+      if (a==10 ) return;
+      System.out.println(Name);
+      display(Name,a+1);
+      
+  }
+}
