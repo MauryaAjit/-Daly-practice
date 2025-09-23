@@ -1,0 +1,21 @@
+class Solution {
+    public int search(int[] nums, int target) {
+        int s=0;
+        int e = nums.length-1;
+
+        return bs(s,e,nums,target);
+        
+    }
+    public static int bs(int s,int e,int []nums,int target){
+        //base case
+        if(s>e) return -1;
+        int mid=s+(e-s)/2;
+
+        //equal
+        if(nums[mid]==target) return mid;
+        //greter
+        else if(target > nums[mid]) return bs(mid+1,e,nums,target);
+        //smaller
+        return bs(s,mid-1,nums,target);
+    }
+}
