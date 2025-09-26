@@ -1,0 +1,65 @@
+import java.util.*;
+
+// Class to represent an item with its value, weight, and value-to-weight ratio.
+class Item {
+    int value, weight;
+    double ratio;
+
+    // Constructor to initialize an item and calculate its ratio.
+    Item(int v, int w) {
+        this.value = v;
+        this.weight = w;
+        this.ratio = (double) v / w;
+    }
+}
+
+public class Main {
+
+    /**
+     * Solves the Fractional Knapsack problem using a greedy approach.
+     *
+     * @param items The list of available items.
+     * @param W     The maximum weight capacity of the knapsack.
+     * @return The maximum total value that can be obtained.
+     */
+    public static double fractionalKnapsack(List<Item> items, double W) {
+        // Sort items in descending order based on their value-to-weight ratio.
+        Collections.sort(items, (a, b) -> Double.compare(b.ratio, a.ratio));
+
+        double totalValue = 0.0;
+        double remainingWeight = W;
+
+        // Iterate through the sorted items and add them to the knapsack.
+        for (Item item : items) {
+            // If the whole item can fit.
+            if (remainingWeight >= item.weight) {
+                totalValue += item.value;
+                remainingWeight -= item.weight;
+            } else {
+                // If only a fraction of the item can fit.
+                totalValue += item.value * (remainingWeight / item.weight);
+                break; // The knapsack is now full.
+            }
+        }
+        return totalValue;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        double W = sc.nextDouble();
+
+        List<Item> items = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int v = sc.nextInt();
+            int w = sc.nextInt();
+            items.add(new Item(v, w));
+        }
+
+        double result = fractionalKnapsack(items, W);
+        System.out.printf("%.2f\n", result);
+
+        sc.close();
+    }
+}
