@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+public class PrimeCheck {
+
+    /**
+     * Checks if a given integer n is a prime number.
+     *
+     * @param n The integer to be checked.
+     * @return true if the number is prime, false otherwise.
+     */
+    public static boolean isPrime(int n) {
+        // According to the problem statement, a prime number is a number greater than 1.
+        // Therefore, any number <= 1 is not prime.
+        if (n <= 1) {
+            return false;
+        }
+
+        // 2 is the only even prime number.
+        if (n == 2) {
+            return true;
+        }
+
+        // All other even numbers are not prime. This check handles most non-primes quickly.
+        if (n % 2 == 0) {
+            return false;
+        }
+
+        // We only need to check for odd divisors from 3 up to the square root of n.
+        // If a number has a divisor greater than its square root, it must also have
+        // a corresponding divisor less than its square root.
+        for (int i = 3; i <= Math.sqrt(n); i += 2) {
+            if (n % i == 0) {
+                return false; // Found a divisor, so it's not prime.
+            }
+        }
+
+        // If no divisors were found, the number is prime.
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+        if (isPrime(n)) {
+            System.out.println("Prime");
+        } else {
+            System.out.println("Not Prime");
+        }
+
+        sc.close();
+    }
+}
