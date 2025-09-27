@@ -1,0 +1,55 @@
+class merge{
+public static void main(String[] args) {
+      int []arr = {4,3,5,6,9,8};
+      int n=arr.length;
+      int s=0;
+      int e=arr.length-1;
+      mergeSort(arr,s,e);
+      for(int i=0;i<arr.length-1;i++){
+        System.out.println(arr[i]);
+      }
+    }
+    public static void mergeSort(int [] arr,int s,int e){
+      if(s>=e) return;
+      int mid= s+(e-s)/2;
+      mergeSort(arr,s,mid);
+      mergeSort(arr,mid+1,e);
+      merge(arr,s,mid,e);
+      
+    }
+    public static void merge(int[]arr,int s,int mid,int e){
+      int n1=m-s+1;
+      int n2=e-m;
+      int [] Larr= new arr[n1];
+      int[] Rarr= new arr[n2];
+      for(int i=0;i<n1;i++){
+        Larr[i]=arr[s+i];
+      }
+      for(int j=0;j<n2;j++){
+        Larr[j]=arr[e+1+j];
+      }
+      int i=o,j=0,k=0;
+      while(i<n1 && j<n2){
+        if(Larr[i]<Rarr[j]){
+          arr[k]=Larr[i];
+          k++;
+          i++;
+       }
+       else{
+         arr[k]= Rarr[j];
+         k++;
+         j++;
+       }
+    }
+    while(i<n1){
+      arr[k]=Larr[i];
+          k++;
+          i++;
+    }
+    while (j<n2){
+       arr[k]= Rarr[j];
+         k++;
+         j++;
+      
+    }
+}
