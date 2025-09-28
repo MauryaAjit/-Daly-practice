@@ -1,0 +1,22 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+      int[]arr={4,2,1,-3,-9,8,-1};
+      int n=arr.length;
+      int maxval=arr[0];
+      int minval=arr[0];
+      for(int i=1;i<arr.length;i++){
+        if(arr[i]>maxval){
+          maxval=arr[i];
+        }
+        if(arr[i]<minval){
+          minval=arr[i];
+        }
+      }
+    System.out.println("maxval "+maxval);
+    System.out.println("minval "+minval);
+      
+      
+  }
+}
