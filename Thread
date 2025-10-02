@@ -1,0 +1,39 @@
+class MyThread extends Thread {
+        public void run() {
+            System.out.println("Thread is running by extending Thread class.");
+        }
+    }
+
+class Thread {
+    public static void main(String[] args) {
+        // Create and start the thread
+        MeraClass my = new MeraClass();
+        my.start();
+    }
+
+    static void sleep(int i) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    static Object classThread() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+}
+
+// Define the custom thread class
+class MeraClass extends Thread {
+    public void run() {
+        for (int i = 1; i <= 10; i++) {
+            try {
+                Thread.sleep (2000); // Pause for 2 seconds
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            System.out.println("Message " + Thread.classThread().getName());
+        }
+    }
+
+    void start() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+}
