@@ -1,0 +1,57 @@
+class Merge{
+    public static void main(String[]args){
+        int[]arr = {4,2,3,5,6,9,7};
+        int n=arr.length;
+        int s=0;
+        int e=arr.length-1;
+        mergeSort(arr, s,e);
+        for(int i=0;i<arr.length;i++){
+            System.out.println(arr[i]);
+        }
+    }
+    public static void mergeSort(int []arr,int s,int e){
+        if (s>=e) return;
+        int mid=s+(e-s)/2;
+        mergeSort(arr,s,mid);
+        mergeSort(arr,mid+1,e);
+        merge(arr,s,mid,e);
+    }
+    public static void merge(int[]arr,int s,int m,int e){
+        int n1=m-s+1;
+        int n2=e-m;
+        int[]Larr=new int[n1];
+        int[]Rarr=new int[n2];
+        for(int i=0;i<n1;i++){
+            Larr[i]=arr[s+i];
+        }
+        for(int j=0;j<n2;j++){
+            Rarr[j]=arr[m+1+j];
+        }
+        int i=0,j=0,k=s;
+        while(i<n1 && j<n2){
+            if(Larr[i]<Rarr[j]){
+                arr[k]=Larr[i];
+                i++;
+                k++;
+            }
+            else{
+                arr[k]=Rarr[j];
+                j++;
+                k++;
+
+            }
+        }
+        while(i<n1){
+            arr[k]=Larr[i];
+            k++;
+            i++;
+        }
+        while(j<n2){
+            arr[k]=Rarr[j];
+            j++;
+            k++;
+        }
+        
+
+    }
+}
