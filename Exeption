@@ -1,0 +1,15 @@
+class Exeption{
+    public static void main(String[]args){
+        //Exeption hendling
+        System.out.println("Start");
+        try{
+        // System.out.println(12/0);
+        int arr[] = {1,2,3,4,5};
+        System.out.println(arr [50]);
+        }catch(Exception e){
+             System.out.println(e);
+        }
+          System.out.println("End");
+
+    }
+}
