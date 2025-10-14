@@ -1,0 +1,87 @@
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Solution {
+    // Memoization table: stores the maximum score difference (Current Player - Opponent) 
+    // for the subarray nums[i...j]. Using Long to safely store scores.
+    private Long[][] memo; 
+
+    /**
+     * Predicts the winner of the array game. Player 1 wins if their score is >= Player 2's score.
+     * @param nums The integer array representing the game values.
+     * @return true if Player 1 can win, false otherwise.
+     */
+    public boolean predictTheWinner(int[] nums) {
+        int n = nums.length;
+        if (n == 0) return true; // Safety check
+
+        // Initialize memoization table
+        memo = new Long[n][n];
+
+        // Player 1 starts with the full array [0...n-1]. 
+        // If the maximum difference they can achieve is >= 0, they win or tie.
+        return maxDiff(nums, 0, n - 1) >= 0;
+    }
+
+    /**
+     * Recursive function to find the maximum score difference the current player can achieve
+     * from the subarray nums[i...j].
+     * * @param nums The array of scores.
+     * @param i The starting index of the subarray.
+     * @param j The ending index of the subarray.
+     * @return The maximum score difference (Current Player's Score - Opponent's Score).
+     */
+    private long maxDiff(int[] nums, int i, int j) {
+        // Base Case: Only one element left. The current player takes it.
+        if (i == j) {
+            return nums[i];
+        }
+
+        // Check memoization table
+        if (memo[i][j] != null) {
+            return memo[i][j];
+        }
+
+        // Option 1: Current player picks nums[i] (left end)
+        // Score = nums[i] - (Max diff the opponent can get from the remaining array nums[i+1...j])
+        // The opponent plays optimally to *minimize* the current player's gain, 
+        // which means maximizing their own score difference.
+        long diffIfPickLeft = nums[i] - maxDiff(nums, i + 1, j);
+
+        // Option 2: Current player picks nums[j] (right end)
+        // Score = nums[j] - (Max diff the opponent can get from the remaining array nums[i...j-1])
+        long diffIfPickRight = nums[j] - maxDiff(nums, i, j - 1);
+
+        // The current player chooses the move that maximizes their score difference.
+        long maxAchievableDiff = Math.max(diffIfPickLeft, diffIfPickRight);
+        
+        // Store and return the result
+        memo[i][j] = maxAchievableDiff;
+        return maxAchievableDiff;
+    }
+}
+
+// Provided structure for input/output in the Main class:
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Read number of elements
+        int n = scanner.nextInt();
+        int[] nums = new int[n];
+        
+        // Read element values
+        for (int i = 0; i < n; i++) {
+            nums[i] = scanner.nextInt();
+        }
+        
+        // Solve the problem
+        Solution solution = new Solution();
+        boolean result = solution.predictTheWinner(nums);
+        
+        // Print the result as "true" or "false"
+        System.out.println(result ? "true" : "false");
+        
+        scanner.close();
+    }
+}
