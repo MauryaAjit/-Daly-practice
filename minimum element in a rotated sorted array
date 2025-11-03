@@ -1,0 +1,23 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        if (!sc.hasNextInt()) return;
+        int n = sc.nextInt();
+        if (n == 0) return;
+
+        int[] nums = new int[n];
+        for (int i = 0; i < n && sc.hasNextInt(); i++)
+            nums[i] = sc.nextInt();
+        sc.close();
+
+        int left = 0, right = n - 1;
+        while (left < right) {
+            int mid = (left + right) / 2;
+            if (nums[mid] > nums[right]) left = mid + 1;
+            else right = mid;
+        }
+        System.out.println(nums[left]);
+    }
+}
