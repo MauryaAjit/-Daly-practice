@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class countOpenDoors {
+    public static int countOpenDoors(int N) {
+        // The number of open doors is the count of perfect squares up to N.
+        // This is equivalent to the floor of the square root of N.
+        return (int) Math.sqrt(N);
+    }
+
+    //Do not change this part of the code
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        if (sc.hasNextInt()) {
+            int T = sc.nextInt(); // Number of test cases
+
+            while (T-- > 0) {
+                if (sc.hasNextInt()) {
+                    int N = sc.nextInt(); // Input number of doors
+                    System.out.println(countOpenDoors(N));
+                }
+            }
+        }
+        sc.close();
+    }
+}
