@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class Main {
+    public static boolean checkAlmostEquivalent(String word1, String word2) {
+        int[] freqDiff = new int[26];
+
+        for (int i = 0; i < word1.length(); i++) {
+            freqDiff[word1.charAt(i) - 'a']++;
+            freqDiff[word2.charAt(i) - 'a']--;
+        }
+
+        // Check if any absolute difference is greater than 3
+        for (int i = 0; i < 26; i++) {
+            if (Math.abs(freqDiff[i]) > 3) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // do not edit this part of code
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String word1 = sc.next();
+        String word2 = sc.next();
+        if (checkAlmostEquivalent(word1, word2)) {
+            System.out.println("true");
+        } else {
+            System.out.println("false");
+        }
+    }
+}
